@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PotatoPunch</title>
+    <style>
+        body{
+            margin:0;
+            height:100vh;
+            background-image:url("pot_back.png");
+            background-size:200px;
+            background-repeat:repeat;
+            position: absolute;
+        }
+        img, h1, button{
+            width: 900px;
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px;
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+    <button id="Puched">Puch me!</button>
+    <img id="KikMe" src="pot_kiknt.png">
+    <button id="slieka">slieka</button>
+    <button id="mājasceptiekartupeļi">mājas ceptie kartupeļi</button>
+    <button id="kartupeļuciete">kartupeļu ciete</button>
+    <button id="PateitoDNS">Pateito DNS</button>
+    <button id="Prengles">Prengles</button>
+    <button id="Nenjutonašķidrums">Nenjutona šķidrums</button>
+    <button id="Kartupeļuādassomiņas">Kartupeļu ādas somiņas</button>
+    <button id="PateitinatorPower">Pateitinator Power</button>
+    <button id="KingTeider">King Teider</button>
+    <button id="GodBuļba">God Buļba</button>
+
+    <button id="bigkik">
+        <img src="Pipe.png">
+        Pipe to kill stupit potat: 10^100
+    </button>
+    <audio id="Snd" src="Pot_punch.mp3"></audio>
+    <audio id="Snd2" src="Pot_upgrade.mp3"></audio>
+    <audio id="Snd3" src="Pot_bonk.mp3"></audio>
+</body>
+<script>
+    const Puched = document.getElementById("Puched")
+    const KikMe = document.getElementById("KikMe")
+
+
+    const slieka = document.getElementById("slieka")
+
+
+    const Snd = document.getElementById("Snd")
+    const Snd2 = document.getElementById("Snd2")
+    const Snd3 = document.getElementById("Snd3")
+    const bigkik = document.getElementById("bigkik")
+
+    let time = 1000 //*60
+    let Teto = 1
+    let toded = 10**100
+    let score = 0
+    let bonus = 1
+    let kikmore = 10
+    slieka.innerHTML = "Sliekas nopirkt par " + kikmore
+
+    
+
+    slieka.addEventListener("click", () => {
+        if (score >= kikmore) {
+            setInterval(function() {
+                score += Teto
+                Puched.innerHTML = score
+            }, time);
+        }
+    })
+
+
+
+    slieka.addEventListener("click", () => {
+        if (score >= kikmore) {
+            bonus += 1
+            score -= kikmore
+            Puched.innerHTML = score
+            kikmore *= 2
+            slieka.innerHTML = "Sliekas nopirkt par " + kikmore
+        }
+        else {
+            alert("Noght enought potato, man... :(")
+        }
+    })
+
+    KikMe.addEventListener("click", () => {
+        score += bonus
+        Puched.innerHTML = score
+    })
+
+
+
+
+
+    //Evil cheat
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'a' || event.key === 'A') {
+            score += 10**100
+            Puched.innerHTML = score
+
+        }
+    });
+  
+    //Sounds
+
+    slieka.addEventListener("click", () => {
+        Snd2.pause();
+        Snd2.currentTime = 0;
+        Snd2.play();
+    });
+    
+    KikMe.addEventListener("click", () => {
+    Snd.currentTime = 0;
+    Snd.play();
+    KikMe.src = "pot_kik.png";
+    setTimeout(() => KikMe.src = "pot_kiknt.png", 600);
+    });
+
+    //Endgame
+    
+    bigkik.addEventListener("click", () => {
+        if (score >= toded) {
+            Snd3.currentTime = 0;
+            Snd3.play();            
+            KikMe.src = "pot_kikkest.png"
+            Puched.innerHTML = "Tu vērti mani par chipsi, tu uzvarēji, es atvainojos!"
+            slieka.innerHTML = "Tu uzvarēji!"
+            score = 0
+
+        }
+        else {
+            alert("Noght enought potato, man... get graindin, em uman! ;p")
+        }
+    })
+</script>
+</html>
