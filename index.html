@@ -5,19 +5,33 @@
     <style>
         body{
             margin:0;
+            margin-inline: 25%;
             height:100vh;
             background-image:url("IMG/pot_back.png");
             background-size:200px;
             background-repeat:repeat;
             position: absolute;
         }
-        img, h1, button{
+        #KikMe, h1, button{
             width: 900px;
             height: auto;
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 20px;
+            font-size: 40px;
+        }
+        .hidden {
+        display: none;
+        }
+        div {
+            display: flex;
+
+        }
+        .Trof {
+            width: 300px;
+            height: auto;
+            margin: 0px;
             font-size: 40px;
         }
     </style>
@@ -28,22 +42,36 @@
 
     <img id="KikMe" src="IMG\pot_kiknt.png">
 
-    <button id="AAA">Slieka</button>
-    <button id="BBB">Mājas ceptie kartupeļi</button>
-    <button id="CCC">Kartupeļu ciete</button>
-    <button id="DDD">Pateito DNS</button>
-    <button id="EEE">Prengles</button>
-    <button id="FFF">Ne Njutona šķidrums</button>
-    <button id="GGG">Kartupeļu ādas somiņa</button>
-    <button id="HHH">Pateitinator Power</button>
-    <button id="III">King Teider</button>
-    <button id="JJJ">God Buļba</button>
+    <button id="AAA" class="step-btn">Slieka 1</button>
+    <button id="BBB" class="step-btn hidden">Mājas ceptie kartupeļi 10</button>
+    <button id="CCC" class="step-btn hidden">Kartupeļu ciete 100</button>
+    <button id="DDD" class="step-btn hidden">Pateito DNS 2000</button>
+    <button id="EEE" class="step-btn hidden">Prengles 500000</button>
+    <button id="FFF" class="step-btn hidden">Ne Njutona šķidrums 10000000</button>
+    <button id="GGG" class="step-btn hidden">Kartupeļu ādas somiņa 200000000000</button>
+    <button id="HHH" class="step-btn hidden">Pateitinator Power 50000000000000</button>
+    <button id="III" class="step-btn hidden">King Teider 100000000000000000</button>
+    <button id="JJJ" class="step-btn hidden">God Buļba 2000000000000000000000000000</button>
 
-    <button id="bigkik">
+    <button id="bigkik" class="step-btn hidden">
         <img src="IMG\Pipe.png">
         Pipe to kill stupit potat: 10^100
     </button>
     
+    <div>
+        <img id="trf1" class="Trof" src="IMG\trfnt.png">
+        <img id="trf67" class="Trof" src="IMG\trfnt.png">
+        <img id="trf69" class="Trof" src="IMG\trfnt.png"> 
+    </div>
+    <div>
+        <img id="trf420" class="Trof" src="IMG\trfnt.png">
+        <img id="trf2008" class="Trof" src="IMG\trfnt.png">
+        <img id="trfwin" class="Trof" src="IMG\trfnt.png">
+    </div>
+
+
+
+
     <audio id="Snd" src="SND\Pot_punch.mp3"></audio>
     <audio id="Snd2" src="SND\Pot_upgrade.mp3"></audio>
     <audio id="Snd3" src="SND\Pot_bonk.mp3"></audio>
@@ -52,7 +80,6 @@
 <script>
     const Puched = document.getElementById("Puched")
     const KikMe = document.getElementById("KikMe")
-
 
     const AAA = document.getElementById("AAA")
     const BBB = document.getElementById("BBB")
@@ -65,11 +92,17 @@
     const III = document.getElementById("III")
     const JJJ = document.getElementById("JJJ")
 
-
     const Snd = document.getElementById("Snd")
     const Snd2 = document.getElementById("Snd2")
     const Snd3 = document.getElementById("Snd3")
     const bigkik = document.getElementById("bigkik")
+
+    const TOF1 = document.getElementById("trf1")
+    const TOF2 = document.getElementById("trf67")
+    const TOF3 = document.getElementById("trf69")
+    const TOF4 = document.getElementById("trf420")
+    const TOF5 = document.getElementById("trf2008")
+    const TOF6 = document.getElementById("trfwin")
 
     let toded = 10**100
     let score = 0
@@ -98,21 +131,67 @@
     let JJJJ = 0
 
     let MORA = 0
-    
+    let isWon = false
     let intervalStarted = false;
 
+    //trofs
+
+    function monitorScore1() {
+        if (score > 0) {
+            TOF1.src = "IMG/trf1.png";
+        }
+    }
+    function monitorScore2() {
+        if (score > 66) {
+            TOF2.src = "IMG/trf67.png";
+        }
+    }
+    function monitorScore3() {
+        if (score > 68) {
+            TOF3.src = "IMG/trf69.png";
+        }
+    }
+    function monitorScore4() {
+        if (score > 419) {
+            TOF4.src = "IMG/trf420.png";
+        }
+    }
+    function monitorScore5() {
+        if (score > 2007) {
+            TOF5.src = "IMG/trf2008.png";
+        }
+    }
+    function monitorScore6() {
+        if (score > 10**100) {
+            TOF6.src = "IMG/trfwin.png";
+        }
+    }
+    
     //Poteito klik
 
     KikMe.addEventListener("click", () => {
-        score += bonus
-        Puched.innerHTML = Math.floor(score)
-    })
+        score += bonus;
+        Puched.innerHTML = Math.floor(score);
+        monitorScore1()
+        monitorScore2()
+        monitorScore3()
+        monitorScore4()
+        monitorScore5()
+        monitorScore6()
+    });
 
     KikMe.addEventListener("click", () => {
-        Snd.currentTime = 0;
-        Snd.play();
-        KikMe.src = "IMG/pot_kik.png";
-        setTimeout(() => KikMe.src = "IMG/pot_kiknt.png", 600);
+        if (!isWon) {
+            Snd.currentTime = 0;
+            Snd.play();
+            KikMe.src = "IMG/pot_kik.png";
+            setTimeout(() => {
+                if (!isWon) KikMe.src = "IMG/pot_kiknt.png";
+            }, 600);
+        } else {
+            Snd.currentTime = 0;
+            Snd.play();
+        }
     });
 
     //Upgrade
@@ -321,12 +400,29 @@
             Puched.innerHTML = "Tu vērti mani par chipsi, tu uzvarēji, es atvainojos!"
             AAA.innerHTML = "Tu uzvarēji!"
             score = 0
-
+            isWon = true
         }
         else {
             alert("Noght enought potato, man... get graindin, em uman! ;p")
         }
     })
+
+    //BUTNEREVELE
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const buttons = Array.from(document.querySelectorAll(".step-btn"));
+      let revealedCount = 1;
+
+      buttons.forEach((btn, index) => {
+        btn.addEventListener("click", () => {
+          const nextIndex = index + 1;
+          if (nextIndex < buttons.length && nextIndex === revealedCount) {
+            buttons[nextIndex].classList.remove("hidden");
+            revealedCount++;
+          }
+        });
+      });
+    });
 
 </script>
 </html>
