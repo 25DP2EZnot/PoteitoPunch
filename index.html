@@ -147,7 +147,6 @@
     let isWon = false
     let intervalStarted = false
 
-
     //particle
 
     const img = document.getElementById("parti")
@@ -162,18 +161,14 @@
     if (scale > 0) {
         scale -= 0.01;
         margin += 5;
-
         img.style.transform = `scale(${scale})`;
         img.style.marginLeft = `${margin}px`;
-
         setTimeout(step, 10);
     } else {
         scale = startScale;
         margin = startMargin;
-
         img.style.transform = `scale(${scale})`;
         img.style.marginLeft = `${margin}px`;
-
     }
     };
 
