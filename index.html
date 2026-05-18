@@ -12,7 +12,7 @@
             background-repeat:repeat;
             position: absolute;
         }
-        #KikMe, h1, button{
+        #KikMe, h1, button, #parti{
             width: 900px;
             height: auto;
             display: flex;
@@ -21,8 +21,15 @@
             margin: 20px;
             font-size: 40px;
         }
+        #parti{
+            width: 200px;
+            margin-top: -460px;
+            margin-left: 75%;
+            position: absolute;
+            z-index: -1;
+        }
         .hidden {
-        display: none;
+            display: none;
         }
         div {
             display: flex;
@@ -41,6 +48,8 @@
     <button id="Puched">Puch me! If you dear tupid uman</button>
 
     <img id="KikMe" src="IMG\pot_kiknt.png">
+
+    <img id="parti" src="IMG\poteit.png">
 
     <button id="AAA" class="step-btn">Slieka 1</button>
     <button id="BBB" class="step-btn hidden">Mājas ceptie kartupeļi 10</button>
@@ -138,6 +147,36 @@
     let isWon = false
     let intervalStarted = false
 
+
+    //particle
+
+    const img = document.getElementById("parti")
+
+    let scale = 1;
+    let margin = 705;
+
+    const startScale = 1;
+    const startMargin = 705;
+
+    function step() {
+    if (scale > 0) {
+        scale -= 0.01;
+        margin += 5;
+
+        img.style.transform = `scale(${scale})`;
+        img.style.marginLeft = `${margin}px`;
+
+        setTimeout(step, 10);
+    } else {
+        scale = startScale;
+        margin = startMargin;
+
+        img.style.transform = `scale(${scale})`;
+        img.style.marginLeft = `${margin}px`;
+
+    }
+    };
+
     //trofs
 
     function monitorScore1() {
@@ -202,6 +241,7 @@
         monitorScore4()
         monitorScore5()
         monitorScore6()
+        step()
     });
 
     KikMe.addEventListener("click", () => {
