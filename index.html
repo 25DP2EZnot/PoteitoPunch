@@ -24,9 +24,11 @@
         #parti{
             width: 200px;
             margin-top: -460px;
-            margin-left: 75%;
+            margin-left: 555px;
             position: absolute;
             z-index: -1;
+            transform: rotate(0deg);
+            scale: 1.3;
         }
         .hidden {
             display: none;
@@ -40,12 +42,19 @@
             margin: 0px;
             font-size: 40px;
         }
+        #KikMe{
+            transition: transform 0.5s ease-in-out; 
+            scale: 1;
+        }
+        .shrink {
+            transform: scale(0.8);
+        }
     </style>
 </head>
 <body>
     <button id="Puched">Puch me! If you dear tupid uman</button>
 
-    <img id="KikMe" src="IMG\pot_kiknt.png">
+    <img id="KikMe" class="shrink" src="IMG\pot_kiknt.png">
 
     <img id="parti" src="IMG\poteit.png">
 
@@ -145,27 +154,40 @@
     let isWon = false
     let intervalStarted = false
 
+    //potat smoling animated
+
+    function zhvuh() {
+        KikMe.classList.add("shrink");
+        setTimeout(() => {
+            KikMe.classList.remove("shrink");
+        }, 500);
+    }
+
     //particle
 
     const img = document.getElementById("parti")
 
-    let scale = 1;
-    let margin = 705;
+    let scale = 1.3;
+    let margin = 555;
+    let rotate = 0;
 
-    const startScale = 1;
-    const startMargin = 705;
+    const startScale = 1.3;
+    const startMargin = 555;
+    const startRotate = 0;
 
     function step() {
     if (scale > 0) {
         scale -= 0.01;
         margin += 5;
-        img.style.transform = `scale(${scale})`;
+        rotate += Math.random(10);
+        img.style.transform = `scale(${scale}) rotate(${rotate}deg)`;
         img.style.marginLeft = `${margin}px`;
         setTimeout(step, 10);
     } else {
-        scale = startScale;
-        margin = startMargin;
-        img.style.transform = `scale(${scale})`;
+        scale = startScale; 
+        margin = startMargin; 
+        rotate = Math.floor(Math.random() * 360); 
+        img.style.transform = `scale(${scale}) rotate(${rotate}deg)`;
         img.style.marginLeft = `${margin}px`;
         }
     };
@@ -235,6 +257,7 @@
         monitorScore5()
         monitorScore6()
         step()
+        zhvuh()
     });
 
     KikMe.addEventListener("click", () => {
