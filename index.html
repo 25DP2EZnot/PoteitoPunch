@@ -42,7 +42,7 @@
             margin: 0px;
             font-size: 40px;
         }
-        #KikMe{
+        #KikMe, #text{
             transition: transform 0.5s ease-in-out; 
             scale: 1;
         }
@@ -56,7 +56,9 @@
 
     <img id="KikMe" class="shrink" src="IMG\pot_kiknt.png">
 
-    <img id="parti" src="IMG\poteit.png">
+    <img id="parti" class="shrink" src="IMG\poteit.png">
+
+    <button id="text">... Jā jā, zinu ka apsaukāju tevi un tavu gēimeni un tavu govi, bet tu nevari neko izdarīt lai mani apstādinātu, es taču esmu kartupalis, ha ha ha... nu tikai ja kāds iesistu man ar metāla trubu, bet tas patērētu vienu googlu sitienu man, jo kā zināms es dodu naudiņu par kuru var nopirkt visādas lietas ja man iesit.....</button>
 
     <button id="AAA" class="step-btn">Slieka 1</button>
     <button id="BBB" class="step-btn hidden">Mājas ceptie kartupeļi 10</button>
@@ -96,6 +98,7 @@
 <script>
     const Puched = document.getElementById("Puched")
     const KikMe = document.getElementById("KikMe")
+    const text = document.getElementById("text")
 
     const AAA = document.getElementById("AAA")
     const BBB = document.getElementById("BBB")
@@ -161,8 +164,54 @@
         setTimeout(() => {
             KikMe.classList.remove("shrink");
         }, 500);
+        text.classList.add("shrink");
+        setTimeout(() => {
+            text.classList.remove("shrink");
+        }, 500);
     }
 
+    //Text
+
+    function Talk() {
+        const frases = [
+            "Pat nesāpēja tu maukšķi",
+            "pacenties atkal, tupeni",
+            "no tevis pat kartupeļu pankūka nesanāks",
+            "Vā es nezinu, grūts jautājums",
+            "Es nezinu {:P}",
+            "Es tevi uztaisīšu par frī kartupeļiem",
+            "Pārlauzīšu kā čipsi!",
+            "Man ir acis visās nevēlamajās vietās",
+            "Teica man turēt muti ciet",
+            "Au, labi drusku sāp...",
+            "Mani necep, es jau tā esmu karsts!",
+            "Tu sit kā nepietiekami izvārīts burkāns!",
+            "Es esmu kartupelis, ne boksa maiss!",
+            "Nu super, tagad man būs biezenis sejā!",
+            "Tu mani dauzi kā vecu maisu pagrabā!",
+            "Es tikai pateicu, ka tu izskaties pēc slapjas frī kartupeļa!",
+            "Au! Man gandrīz miza nolobījās!",
+            "Es neesmu vainīgs, ka esmu pārāk kraukšķīgs!",
+            "Tagad tu esi oficiāli kartupeļu ienaidnieks!",
+            "Tu mani sasiti stiprāk nekā dakša pusdienās!",
+            "Es tev uzmetīšu cietes lāstu!",
+            "Esmu kartupelis ar emocijām, zini!",
+            "Tu uzvedies kā sadedzis čips!",
+            "Es tevi ierakstīšu melnajā dārzeņu sarakstā!",
+            "Es būšu atriebīgs kartupelis no pagraba!",
+            "Nomierinies, citādi kļūsi par biezeni!",
+            "Es tikai jokoju, nevajadzēja mani mizot dzīvu!",
+            "Tu sit kā dusmīgs zemnieks ražas laikā!",
+            "Es tev naktī kurpēs sadīgšu!",
+            "Šis ir sliktākais, kas ar kartupeli noticis kopš frī katla!"
+
+        ];
+
+        const random = Math.floor(Math.random() * frases.length);
+
+        text.innerHTML = frases[random];
+    }
+    
     //particle
 
     const img = document.getElementById("parti")
@@ -258,6 +307,7 @@
         monitorScore6()
         step()
         zhvuh()
+        Talk()
     });
 
     KikMe.addEventListener("click", () => {
