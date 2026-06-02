@@ -214,40 +214,47 @@
     
     //particle
 
-    const img = document.getElementById("parti")
+const img = document.getElementById("parti");
 
-    let anagele = Math.random()*Math.PI*2
-    let x = Math.cos(anagele)
-    let y = Math.sin(anagele)
+function createParticle() {
 
-    let scale = 1.3;
-    let marginT = -460;
-    let marginL = 555;
-    let rotate = 0;
-
-    const startScale = 1.3;
-    const startMarginT = -460;
-    const startMarginL = 555;
-    const startRotate = 0;
-
-    function step(klons) {
+    const klons = img.cloneNode(true);
     img.parentNode.appendChild(klons);
 
-    if (scale > 0) {
-        scale -= 0.01;
-        marginT += y*10;
-        marginL += x*10;
-        rotate += Math.random()*10;
-        klons.style.transform = `scale(${scale}) rotate(${rotate}deg)`;
-        klons.style.marginLeft = `${marginL}px`;
-        klons.style.marginTop = `${marginT}px`;
-        setTimeout(step(klons), 10);
-    } else {
-        klons.remove();
-        }
-    console.log(marginL, marginT, x, y, anagele)
-    };
+    let angle = Math.random() * Math.PI * 2;
+    let x = Math.cos(angle);
+    let y = Math.sin(angle);
 
+    let scale = 1.3;
+    let marginT = -1200;
+    let marginL = 400;
+    let rotate = 0;
+
+    function step() {
+
+        if (scale > 0) {
+
+            scale -= 0.01;
+            marginT += y * 10;
+            marginL += x * 10;
+            rotate += Math.random() * 10;
+
+            klons.style.marginLeft = `${marginL}px`;
+            klons.style.marginTop = `${marginT}px`;
+            klons.style.transform =
+                `scale(${scale}) rotate(${rotate}deg)`;
+
+            setTimeout(step, 10);
+
+        } else {
+
+            klons.remove();
+
+        }
+    }
+
+    step();
+}
     //trofs
 
     function monitorScore1() {
@@ -315,11 +322,7 @@
         monitorScore4()
         monitorScore5()
         monitorScore6() 
-        const klons = img.cloneNode(true);
-        klons.style.transform = `scale(${scale}) rotate(${rotate}deg)`;
-        klons.style.marginTop = `${marginT}px`;
-        klons.style.marginLeft = `${marginL}px`;
-        step(klons)
+        createParticle()
         zhvuh()
         Talk()
     });
